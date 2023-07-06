@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 # id (primary key - automático)
 # first_name (string), last_name (string), phone (string)
 # email (email), created_date (date), description (text)
@@ -31,6 +33,12 @@ class Contact(models.Model):
     picture = models.ImageField(upload_to='pictures/%Y/%m/', blank=True)
     category = models.ForeignKey(
         Category,
+        # quando apagar a categoria, fica nulo no nome da categoria no contato
+        on_delete=models.SET_NULL,
+        blank=True, null=True
+    )
+    owner = models.ForeignKey(
+        User,
         # quando apagar a categoria, fica nulo no nome da categoria no contato
         on_delete=models.SET_NULL,
         blank=True, null=True
