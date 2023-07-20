@@ -6,7 +6,7 @@
   
       <h2>Contact</h2>
       <form 
-        action="{% url 'contact:create' %}"
+        action="{{ form.action }}"
         method="POST"
         enctype="multipart/form-data">
         {% comment %} requerido quando vai mandar artigos (enctype) ao invés de só textos {% endcomment %}
@@ -21,6 +21,10 @@
               {% comment %} o {{ field }} é o imput {% endcomment %}
 
               {{ field.errors }}
+
+              {% if field.help_text %}
+                <p class="help-text">{{ field.help_text }}</p>
+              {% endif %}
             </div>
           {% endfor %}
         </div>
